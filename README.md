@@ -71,6 +71,8 @@ python -m pip install -r requirements.txt
 
 ### **4. Ejecutar.**
 
+---
+
 - En Windows.
 
 ```powershell
