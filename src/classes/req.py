@@ -36,18 +36,19 @@ for request in reversed(driver_wire.requests):
         authorization = dict(request.headers)["Authorization"]
         break
 
+if authorization != "":
+    
+    ## define url to request
+    url_datos = "https://srienlinea.sri.gob.ec/sri-catastro-sujeto-servicio-internet/rest/ConsolidadoContribuyente/obtenerPorNumerosRuc?&ruc=2390060680001"
+    url_establecimientos = "https://srienlinea.sri.gob.ec/sri-catastro-sujeto-servicio-internet/rest/Establecimiento/consultarPorNumeroRuc?numeroRuc=2390060680001"
 
-## define url to request
-url_datos = "https://srienlinea.sri.gob.ec/sri-catastro-sujeto-servicio-internet/rest/ConsolidadoContribuyente/obtenerPorNumerosRuc?&ruc=2390060680001"
-url_establecimientos = "https://srienlinea.sri.gob.ec/sri-catastro-sujeto-servicio-internet/rest/Establecimiento/consultarPorNumeroRuc?numeroRuc=2390060680001"
+    # define dictionary with authorization token
+    request_headers = {
+        "Authorization": str(authorization)
+    }
 
-# define dictionary with authorization token
-request_headers = {
-    "Authorization": str(authorization)
-}
-
-# requests to get data
-request1 = requests.get(url=url_datos, headers=request_headers)
-request2 = requests.get(url=url_establecimientos, headers=request_headers)
-print("request data -----> \n", json.dumps(json.loads(request1.text), indent=1))
-print("request establecimientos -----> \n", json.dumps(json.loads(request2.text), indent=1))
+    # requests to get data
+    request1 = requests.get(url=url_datos, headers=request_headers)
+    request2 = requests.get(url=url_establecimientos, headers=request_headers)
+    print("request data -----> \n", json.dumps(json.loads(request1.text), indent=1))
+    print("request establecimientos -----> \n", json.dumps(json.loads(request2.text), indent=1))
