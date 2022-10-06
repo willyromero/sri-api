@@ -1,2 +1,6 @@
 def page(err):
-    return "<h1>404 Page Not Found</h1>", 404
+    response = {
+        "status": "FAILED",
+        "data": {"error": "This resource not exists"}
+    }
+    return response, 404
