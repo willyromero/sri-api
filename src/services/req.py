@@ -8,12 +8,12 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from seleniumwire import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
+from seleniumwire import webdriver as webdriverwire
+# from webdriver_manager.chrome import ChromeDriverManager
 
-# curret_path = Path(__file__).parent.resolve() 
-# cert_path = curret_path / "driver"
-# driver_path = glob.glob(f"{cert_path}/*.exe")[0]
+curret_path = Path(__file__).parent.resolve() 
+cert_path = curret_path / "driver"
+driver_path = glob.glob(f"{cert_path}/*.exe")[0]
 
 
 url_to_grab = "https://srienlinea.sri.gob.ec/sri-en-linea/SriRucWeb/ConsultaRuc/Consultas/consultaRuc/"
@@ -21,7 +21,7 @@ ruc = "2390060680001"
 url_datos = f"https://srienlinea.sri.gob.ec/sri-catastro-sujeto-servicio-internet/rest/ConsolidadoContribuyente/obtenerPorNumerosRuc?&ruc={ruc}"
 url_establecimientos = f"https://srienlinea.sri.gob.ec/sri-catastro-sujeto-servicio-internet/rest/Establecimiento/consultarPorNumeroRuc?numeroRuc={ruc}"
 
-id_ruc_imput = "busquedaRucId"
+id_ruc_input = "busquedaRucId"
 xpath_consultar_button = "//div[@class='row'][2]//button"
 xpath_verify = f"//*[text()[contains(.,'{ruc}')]]"
 
@@ -32,23 +32,23 @@ i = 0
 while True:
     max_iteration = 0
 # for see interaction
-    options = webdriver.ChromeOptions()
+    options = webdriverwire.ChromeOptions()
     options.add_argument('headless')
     options.add_argument("start-maximized")
     options.add_argument("disable-infobars")
     # options.add_argument("--disable-extensions")
     # options.add_argument("--window-size=500, 500")
-    options.add_experimental_option("detach", False)                         
+    # options.add_experimental_option("detach", False)                         
 
-    driver_wire = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-    # driver_wire = webdriver.Chrome(driver_path, options=options)
+    # driver_wire = webdriverwire.Chrome(ChromeDriverManager().install(), options=options)
+    driver_wire = webdriverwire.Chrome(driver_path, options=options)
 
 
     driver_wire.get(url_to_grab)
     print("iteration ---> ", i)
 
     try:    
-        ruc_imput = driver_wire.find_element(By.ID, id_ruc_imput)
+        ruc_imput = driver_wire.find_element(By.ID, id_ruc_input)
         ruc_imput.send_keys(ruc)
 
         consultar_button = WebDriverWait(driver_wire, timeout=15).until(EC.element_to_be_clickable((By.XPATH, xpath_consultar_button )))
