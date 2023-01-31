@@ -17,7 +17,7 @@ driver_path = glob.glob(f"{cert_path}/*.exe")[0]
 
 
 url_to_grab = "https://srienlinea.sri.gob.ec/sri-en-linea/SriRucWeb/ConsultaRuc/Consultas/consultaRuc/"
-ruc = "2390060680001"
+ruc = "ruc_number"
 url_datos = f"https://srienlinea.sri.gob.ec/sri-catastro-sujeto-servicio-internet/rest/ConsolidadoContribuyente/obtenerPorNumerosRuc?&ruc={ruc}"
 url_establecimientos = f"https://srienlinea.sri.gob.ec/sri-catastro-sujeto-servicio-internet/rest/Establecimiento/consultarPorNumeroRuc?numeroRuc={ruc}"
 
